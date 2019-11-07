@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.zr.mapper.RoleMapper">
+   <!-- <resultMap id="RoleMap" type="com.zr.pojo.Role">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="rolename" property="rolename" jdbcType="VARCHAR"/>
+        <result column="note" property="note" jdbcType="VARCHAR"/>
+    </resultMap>-->
+    <insert id = "insertRole" parameterType="role">
+        insert into mybatis_role(roleName,note) values (#{roleName},#{note})
+    </insert>
+
+    <delete id="deleteRole" parameterType="long">
+        delete from mybatis_role where id = #{id}
+    </delete>
+
+    <update id="updateRole" parameterType="role">
+        update mybatis_role set roleName = #{roleName} ,note = #{note} where id = #{id}
+    </update>
+
+    <select id="getRole" parameterType="int" resultType="role">
+        select id ,roleName ,note from mybatis_role where id = #{id}
+    </select>
+
+    <select id="findRoles" parameterType="string" resultType="role">
+        select id ,roleName,note from mybatis_role
+        where roleName like  concat(concat('%',#{roleName}),'%')
+    </select>
+    </mapper>
